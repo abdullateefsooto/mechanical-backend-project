@@ -17,6 +17,7 @@ app.post("/booking", async (req, res) => {
     const{
         name,
         email,
+        phone,
         vehicleType,
         serviceRequired,
         message,
@@ -37,8 +38,9 @@ app.post("/booking", async (req, res) => {
             subject: "New Service Booking",
             html: `
             <h3>New Booking Details</h3>
-            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Name:</strong> My name is ${name}</p>
             <p><strong>Email/Phone:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
             <p><strong>Vehicle Type:</strong> ${vehicleType}</p>
             <p><strong>Service Required:</strong> ${serviceRequired}</p>
             <p><strong>Preferred Date:</strong> ${preferredDate}</p>
@@ -72,7 +74,7 @@ app.post("/contact", async (req, res) => {
       subject: "New Contact Message",
       html: `
         <h3>New Contact Form Submission</h3>
-        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Name:</strong> My name is  ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Message:</strong> ${message}</p>
