@@ -4,14 +4,6 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 dotenv.config();
 const PORT = process.env.PORT || 5000;
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-
-
 
 
 const app = express();
@@ -115,15 +107,7 @@ app.post("/contact", async (req, res) => {
   }
 });
 
-if (process.env.NODE_ENV === "production") {
-  // Serve static files
-  app.use(express.static(path.join(__dirname, "frontend/dist")));
 
-  // Wildcard route for React Router (fixes 404)
-  app.get(/^\/(?!api).*/, (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend/dist", "index.html"));
-  });
-}
 
 
 app.listen(PORT, () => {
