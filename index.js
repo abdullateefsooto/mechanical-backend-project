@@ -6,12 +6,29 @@ import dotenv from "dotenv";
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 const app = express();
-app.use(cors());
 app.use(express.json());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://mechanical-frontend-project.vercel.app/"
+  ],
+  credentials: true,
+}));
 
 app.get("/", (req, res) => {
   res.send("Email Service is Running");
 });
+
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.join(__dirname, "frontend/dist", "index.html")
+    );
+  });
+}
 
 app.post("/booking", async (req, res) => {
     const{
@@ -89,6 +106,15 @@ app.post("/contact", async (req, res) => {
   }
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.join(__dirname, "frontend/dist", "index.html")
+    );
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`✅Server is running on port ${PORT}`);
