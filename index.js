@@ -8,16 +8,26 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
+// app.use(cors({
+//   origin: [
+//     "http://localhost:5173",
+//     "https://mechanical-frontend-project.vercel.app/"
+//   ],
+//   credentials: true,
+// }));
+
 app.use(cors({
-  origin: "https://mechanical-frontend-project.vercel.app",
+  origin: ["https://mechanical-frontend-project.vercel.app", "http://localhost:5173"],
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
 }));
 
+app.options("/", cors());
 
 app.get("/", (req, res) => {
   res.send("Email Service is Running");
 });
+
 
 
 app.post("/booking", async (req, res) => {
