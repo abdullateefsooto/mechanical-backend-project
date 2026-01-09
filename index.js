@@ -14,7 +14,6 @@ app.use(cors({
   allowedHeaders: ["Content-Type"],
 }));
 
-app.options("*", cors());
 
 app.get("/", (req, res) => {
   res.send("Email Service is Running");
